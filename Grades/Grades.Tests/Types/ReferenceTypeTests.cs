@@ -6,8 +6,57 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Grades.Tests.Types
 {
     [TestClass]
-    public class ReferenceTypeTests
+    public class TypeTests
     {
+
+        [TestMethod]
+        public void AddDaysToDateTime()
+        {
+            DateTime date = new DateTime(2015, 1, 1);
+            date = date.AddDays(1);
+
+            Assert.AreEqual(2, date.Day);
+        }
+
+        [TestMethod]
+        public void ValueTypesPassByValue()
+        {
+            int x = 46;
+            IncrementNumber(x);
+
+            Assert.AreEqual(46, x);
+        }
+
+        private void IncrementNumber(int number)
+        {
+            number += 1;
+        }
+
+        [TestMethod]
+        public void ReferenceTypesPassByValue()
+        {
+            GradeBook book1 = new GradeBook();
+            GradeBook book2 = book1;
+
+            GiveBookAName(book2);
+            Assert.AreEqual("A Gradebook", book1.name);
+        }
+
+        private void GiveBookAName(GradeBook book)
+        {
+            book.name = "A Gradebook";
+        }
+
+        [TestMethod]
+        public void StringComparisons()
+        {
+            string name1 = "Chris";
+            string name2 = "chris";
+
+            bool result = String.Equals(name1, name2, StringComparison.InvariantCultureIgnoreCase);
+            Assert.IsTrue(result);
+        }
+
         [TestMethod]
         public void IntVariablesHoldAValue()
         {
