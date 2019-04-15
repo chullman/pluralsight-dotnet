@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Grades
 {
-    class GradeStatistics
+    public class GradeStatistics
     {
        private float? _averageGrade = null;
        private float? _highestGrade = null;

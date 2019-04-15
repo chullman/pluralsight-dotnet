@@ -21,6 +21,8 @@ namespace Grades
             GradeBook book2 = book;
             book2.AddGrade(75);
 
+            book.name = "Chris' grades";
+
             foreach (var aGrade in book.GetGrades())
             {
                 Console.WriteLine(aGrade);

@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 
 namespace Grades
 {
-    class GradeBook
+    public class GradeBook
     {
         private List<float> _grades;
+
+        public string name { get; set; }
 
         public GradeBook()
         {
