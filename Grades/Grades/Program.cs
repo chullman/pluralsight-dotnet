@@ -21,6 +21,9 @@ namespace Grades
             GradeBook book2 = book;
             book2.AddGrade(75);
 
+            book.NameChanged += new NameChangedDelegate(OnNameChanged);
+            book.NameChanged += new NameChangedDelegate(OnNameChanged2);
+
             book.name = "Chris' grades";
 
             foreach (var aGrade in book.GetGrades())
@@ -40,5 +43,18 @@ namespace Grades
             Console.WriteLine($"Lowest: {stats.GetLowestGrade()}");
 
         }
+
+        static void OnNameChanged(string existingName, string newName)
+        {
+            Console.WriteLine($"Grade book changing name from {existingName} to {newName}");
+        }
+
+        static void OnNameChanged2(string existingName, string newName)
+        {
+            Console.WriteLine("***");
+        }
+
     }
+
+
 }

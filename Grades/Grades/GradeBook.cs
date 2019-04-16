@@ -12,6 +12,8 @@ namespace Grades
 
         private string _name;
 
+        public event NameChangedDelegate NameChanged;
+
         public string name
         {
             get { return _name; }
@@ -19,6 +21,11 @@ namespace Grades
             {
                 if (!String.IsNullOrEmpty(value))
                 {
+                    if (name != value)
+                    {
+                        NameChanged(_name, value);
+                    }
+
                     _name = value;
                 }
             }
@@ -26,6 +33,7 @@ namespace Grades
 
         public GradeBook()
         {
+            _name = "Unknown";
             _grades = new List<float>();
         }
 
