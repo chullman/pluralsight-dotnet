@@ -10,7 +10,19 @@ namespace Grades
     {
         private List<float> _grades;
 
-        public string name { get; set; }
+        private string _name;
+
+        public string name
+        {
+            get { return _name; }
+            set
+            {
+                if (!String.IsNullOrEmpty(value))
+                {
+                    _name = value;
+                }
+            }
+        }
 
         public GradeBook()
         {
