@@ -35,7 +35,7 @@ namespace ComparingObjectEqualityGenerics
             }
 
             this[key].Add(employee);
-            return this;
+            return this; // allows us to chain adds together
         }
     }
 
