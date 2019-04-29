@@ -9,7 +9,7 @@ namespace QueueGeneric
     class Program
     {
 
-        // Queue is a FIFO structure
+        // Queue is a FIFO structure, Use Stack for LIFO
 
         static void Main(string[] args)
         {
