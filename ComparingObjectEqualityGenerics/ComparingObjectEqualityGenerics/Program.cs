@@ -24,22 +24,37 @@ namespace ComparingObjectEqualityGenerics
         }
     }
 
+    public class DepartmentsRepo : SortedDictionary<string, SortedSet<Employee>>
+    {
+        public DepartmentsRepo Add(string key, Employee employee)
+        {
+            if (!this.ContainsKey(key))
+            {
+                // Because we're new'ing up an employee each time, the sorted set will treat each employee as different objects even though they have the same name, so we need employeecomparer to check against the name property in the object for matching duplicates
+                this.Add(key, new SortedSet<Employee>(new EmployeeComparer()));
+            }
+
+            this[key].Add(employee);
+            return this;
+        }
+    }
+
     class Program
     {
         static void Main(string[] args)
         {
 
-            var departments = new SortedDictionary<string, SortedSet<Employee>>();
+            //var departments = new SortedDictionary<string, SortedSet<Employee>>();
+            var departments = new DepartmentsRepo();
 
-            departments.Add("Sales", new SortedSet<Employee>(new EmployeeComparer()));
-            departments["Sales"].Add(new Employee {Name = "Joy"});
-            departments["Sales"].Add(new Employee {Name = "Dani"});
-            departments["Sales"].Add(new Employee {Name = "Dani"});
+            departments.Add("Sales", new Employee {Name = "Joy"})
+                .Add("Sales", new Employee {Name = "Joy"})
+                .Add("Sales", new Employee {Name = "Dani"})
+                .Add("Sales", new Employee {Name = "Dani"});
 
-            departments.Add("Engineering", new SortedSet<Employee>(new EmployeeComparer()));
-            departments["Engineering"].Add(new Employee {Name = "Scott"});
-            departments["Engineering"].Add(new Employee {Name = "Alex"});
-            departments["Engineering"].Add(new Employee {Name = "Dani"});
+            departments.Add("Engineering", new Employee {Name = "Scott"})
+                .Add("Engineering", new Employee {Name = "Alex"})
+                .Add("Engineering", new Employee {Name = "Dani"});
 
             foreach (var department in departments)
             {
